@@ -2164,7 +2164,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.getElementById('btn-docs').addEventListener('click', () => {
-  window.open('documentation.md', '_blank');
+  window.open('doc.html', '_blank');
 });
 
 // Paramètres

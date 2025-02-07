@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Documentation - Gestionnaire de mots de passe</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      color: #2c3e50;
+    }
+
+    .doc-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      margin-top: 0;
+      text-align: center;
+      font-size: 2em;
+      color: #2c3e50;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    ul {
+      margin: 1em 0;
+      padding-left: 1.5em;
+    }
+
+    .doc-back-button {
+      display: block;
+      margin: 30px auto 0 auto;
+      padding: 15px 25px;
+      background: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .doc-back-button:hover {
+      background: #357abd;
+    }
+
+    .doc-section {
+      margin-bottom: 30px;
+    }
+
+    .doc-section h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 1.4em;
+      color: #34495e;
+    }
+
+    .doc-section h3 {
+      margin-top: 15px;
+      margin-bottom: 8px;
+      font-size: 1.2em;
+      color: #34495e;
+    }
+  </style>
+</head>
+<body>
+  <div class="doc-container">
+    <h1>Documentation du Gestionnaire de mots de passe</h1>
+
+    <div class="doc-section">
+      <h2>1. Présentation Générale</h2>
+      <p>
+        Ce gestionnaire de mots de passe vous permet de créer, stocker, 
+        catégoriser et chiffrer vos identifiants de façon sécurisée. 
+        Il fonctionne côté client, ce qui signifie que vos données 
+        ne quittent pas votre machine.
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2>2. Fonctionnalités Clés</h2>
+      <ul>
+        <li><strong>Chiffrement AES-GCM :</strong> tous les mots de passe sont protégés.</li>
+        <li><strong>Organisation par catégorie :</strong> classez facilement vos identifiants.</li>
+        <li><strong>Recherche et filtrage :</strong> retrouvez rapidement vos comptes.</li>
+        <li><strong>Export/Import :</strong> sauvegardez et restaurez votre Vault au format HTML chiffré.</li>
+        <li><strong>Analyse de sécurité :</strong> identifiez les mots de passe faibles ou compromis (via l'API HaveIBeenPwned).</li>
+        <li><strong>Gestion 2FA (OTP) :</strong> ajoutez la génération de codes à 6 chiffres pour une authentification à deux facteurs.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h2>3. Utilisation</h2>
+      <h3>3.1 Créer une nouvelle session</h3>
+      <p>
+        Sur la page d'accueil, cliquez sur <em>"Créer une nouvelle session"</em>, 
+        puis choisissez un mot de passe maître suffisamment robuste (au moins 
+        12 caractères, comprenant majuscules, chiffres et symboles). 
+      </p>
+
+      <h3>3.2 Importer un fichier existant</h3>
+      <p>
+        Si vous disposez déjà d'un fichier HTML chiffré (exporté préalablement), 
+        cliquez sur <em>"Importer un fichier chiffré"</em>, glissez votre fichier 
+        ou utilisez le bouton <em>"Choisir un fichier"</em> puis saisissez le 
+        même mot de passe maître qui avait été utilisé pour créer ce fichier.
+      </p>
+
+      <h3>3.3 Ajouter des entrées</h3>
+      <p>
+        Une fois le Vault déverrouillé, vous pouvez ajouter de nouvelles entrées 
+        (service, identifiant, mot de passe, catégorie, etc.) via le bouton 
+        <em>"Nouveau"</em>. Il est possible de générer automatiquement un mot 
+        de passe aléatoire ou de copier/coller un existant.
+      </p>
+
+      <h3>3.4 Exporter et sauvegarder</h3>
+      <p>
+        Pour éviter toute perte, vous pouvez régulièrement exporter votre Vault 
+        via le bouton <em>"Exporter"</em>. Cela génère un fichier HTML chiffré 
+        (uniquement lisible avec le mot de passe maître adéquat).
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2>4. Raccourcis Clavier</h2>
+      <ul>
+        <li><strong>Alt + N :</strong> Ouvrir la fenêtre pour <em>ajouter un nouveau mot de passe</em>.</li>
+        <li><strong>Alt + E :</strong> Lancer l’<em>export</em> du Vault.</li>
+        <li><strong>Alt + L :</strong> Verrouiller immédiatement le Vault.</li>
+        <li><strong>Échap (Esc) :</strong> Fermer la plupart des fenêtres/modales ouvertes.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h2>5. Analyse de sécurité</h2>
+      <p>
+        Le gestionnaire propose un outil d'analyse qui détecte :
+      </p>
+      <ul>
+        <li>Les mots de passe trop courts ou faibles (manquant de variété).</li>
+        <li>Les mots de passe déjà compromis dans des fuites de données publiques (via HaveIBeenPwned).</li>
+        <li>Les mots de passe réutilisés sur plusieurs services.</li>
+      </ul>
+      <p>
+        Il vous est alors conseillé d’améliorer ou de changer ces mots de passe 
+        afin de mieux protéger vos comptes.
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2>6. Authentification à Deux Facteurs (OTP)</h2>
+      <p>
+        Vous pouvez configurer une clé secrète OTP (format Base32) pour 
+        générer des codes à 6 chiffres, renouvelés toutes les 30 secondes. 
+        Cela permet de renforcer la sécurité d'un compte.
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2>7. Questions Fréquentes (FAQ)</h2>
+      <h3>7.1 Puis-je utiliser n'importe quel mot de passe maître ?</h3>
+      <p>
+        Techniquement oui, mais il est fortement recommandé d’en choisir un 
+        suffisamment long et complexe pour résister à d’éventuelles attaques. 
+        Évitez d'utiliser un mot de passe déjà utilisé ailleurs.
+      </p>
+
+      <h3>7.2 Que faire en cas d'oubli du mot de passe maître ?</h3>
+      <p>
+        Malheureusement, si vous oubliez votre mot de passe maître, 
+        il sera impossible de récupérer le contenu de votre Vault, 
+        car tout est chiffré de manière sécurisée. 
+        Il est donc primordial de le retenir ou de le stocker en lieu sûr.
+      </p>
+
+      <h3>7.3 Mes données sont-elles envoyées sur un serveur externe ?</h3>
+      <p>
+        Non. Toutes les opérations de chiffrement/déchiffrement se font localement, 
+        dans votre navigateur. Les données ne sortent pas de votre poste, 
+        sauf si vous choisissez de les exporter vous-même (fichier HTML).
+      </p>
+    </div>
+
+    <button class="doc-back-button" onclick="window.location.href='index.html'">
+      Retour au Vault
+    </button>
+  </div>
+</body>
+</html>
