@@ -1,0 +1,843 @@
+/* ==========================================================================
+   Variables communes (ombres, etc.)
+   ========================================================================== */
+   :root {
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  /* ==========================================================================
+     Styles communs aux deux thèmes
+     ========================================================================== */
+  [data-theme="dark"],
+  [data-theme="retro"] {
+    /* Overlays, modales, notifications, cartes de stats… */
+    --modal-bg: var(--bg-secondary);
+    
+    /* Forcer l'absence de fonds blancs sur les éléments importants */
+    /* (ajustez la liste si besoin) */
+    body,
+    #app-screen,
+    #welcome-screen,
+    .header-content,
+    .main-content,
+    .action-section,
+    .stat-card,
+    .categories-panel,
+    .passwords-panel,
+    .password-item,
+    .category-item,
+    .btn-action,
+    input,
+    select,
+    textarea,
+    .modal,
+    .modal-content,
+    .settings-option,
+    .password-options,
+    .search-bar,
+    .notification,
+    .field-header,
+    .tab-content,
+    .form-group,
+    .analyze-results,
+    .analyze-metric,
+    .drop-zone,
+    .welcome-buttons button,
+    .file-input-label {
+      background-color: var(--bg-primary) !important;
+    }
+    
+    /* Modales / overlays */
+    .modal-overlay {
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+    }
+    
+    .modal,
+    .notification,
+    .stat-card {
+      border: 1px solid var(--border-color);
+    }
+  }
+  
+  
+  /* ==========================================================================
+     Thème Sombre – Style professionnel moderne
+     ========================================================================== */
+  [data-theme="dark"] {
+    /* Variables du thème sombre */
+    --bg-primary: #1a1b1e;
+    --bg-secondary: #2a2b2e;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --border-color: #3a3b3e;
+    --error-color: #ff4d4d;
+    --success-color: #2ecc71;
+    --warning-color: #f1c40f;
+    --input-bg: #2a2b2e;
+    --accent-color: #3498db;
+
+    /* Fond global et couleurs */
+    background: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  /* Style global pour le thème sombre */
+  [data-theme="dark"] body {
+    background: var(--bg-primary);
+    min-height: 100vh;
+  }
+
+  /* En-tête */
+  [data-theme="dark"] header {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  [data-theme="dark"] .header-content {
+    background: var(--bg-secondary);
+  }
+
+  [data-theme="dark"] .header-left h2 {
+    color: var(--text-primary);
+  }
+
+  [data-theme="dark"] #app-screen header {
+    background: var(--bg-primary);
+    padding: 25px 30px;
+    border: 1px solid var(--accent-color);
+    margin-bottom: 8px;
+  }
+
+  /* Boutons d'action */
+  [data-theme="dark"] .btn-action {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+  }
+
+  [data-theme="dark"] .btn-action:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+  }
+
+  /* Conteneurs principaux */
+  [data-theme="dark"] .main-content {
+    background: var(--bg-primary);
+  }
+
+  [data-theme="dark"] .action-section {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  /* Panneaux latéraux */
+  [data-theme="dark"] .categories-panel,
+  [data-theme="dark"] .passwords-panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  /* Éléments de liste */
+  [data-theme="dark"] .password-item,
+  [data-theme="dark"] .category-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+  }
+
+  [data-theme="dark"] .password-item:hover,
+  [data-theme="dark"] .category-item:hover {
+    background: var(--bg-primary);
+    transform: translateY(-2px);
+  }
+
+  [data-theme="dark"] .category-item.active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+
+  /* Champs de formulaire */
+  [data-theme="dark"] input,
+  [data-theme="dark"] select,
+  [data-theme="dark"] textarea {
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+  }
+
+  [data-theme="dark"] input:focus,
+  [data-theme="dark"] select:focus,
+  [data-theme="dark"] textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  }
+
+  /* Modales et notifications */
+  [data-theme="dark"] .modal {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  [data-theme="dark"] .modal-overlay {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  [data-theme="dark"] .notification {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+  }
+
+  /* Zone de dépôt et fichiers */
+  [data-theme="dark"] .drop-zone {
+    background: var(--bg-secondary);
+    border: 2px dashed var(--border-color);
+  }
+
+  [data-theme="dark"] .drop-zone.drag-over {
+    border-color: var(--accent-color);
+    background: rgba(52, 152, 219, 0.1);
+  }
+
+  /* Onglets et formulaires */
+  [data-theme="dark"] .form-tabs {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  [data-theme="dark"] .tab-button {
+    color: var(--text-secondary);
+  }
+
+  [data-theme="dark"] .tab-button.active {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+  }
+
+  /* Options de mot de passe */
+  [data-theme="dark"] .password-options {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  /* Scrollbar personnalisée */
+  [data-theme="dark"] ::-webkit-scrollbar {
+    width: 10px;
+    background: var(--bg-primary);
+  }
+
+  [data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 5px;
+  }
+
+  [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+  }
+
+  /* Tooltips */
+  [data-theme="dark"] [title]:hover::after {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+  }
+
+  /* États des boutons */
+  [data-theme="dark"] .btn-action:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  [data-theme="dark"] .btn-action:active {
+    transform: translateY(1px);
+  }
+
+  /* Focus states */
+  [data-theme="dark"] *:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent-color);
+  }
+  
+  
+  /* ==========================================================================
+     Thème Rétro – Style "terminal"
+     ========================================================================== */
+  [data-theme="retro"] {
+    /* Variables du thème rétro */
+    --bg-primary: #001a15;
+    --bg-secondary: #002b20;
+    --text-primary: #00ff00;     /* Pour un effet néon */
+    --text-secondary: #00cc00;
+    --border-color: #00ff00;
+    --error-color: #ff0000;
+    --success-color: #00ff00;
+    --warning-color: #ffff00;
+    --input-bg: #001810;
+    --accent-color: #66ff66;      /* Pour les focus et hover */
+    
+    /* Fond global, police et couleurs */
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: "Courier New", monospace;
+  }
+  
+  /* Tous les éléments n'auront pas de border-radius */
+  [data-theme="retro"] * {
+    border-radius: 0 !important;
+    font-family: "Courier New", monospace;
+  }
+  
+  /* Global sur body */
+  [data-theme="retro"] body {
+    background: var(--bg-primary);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  /* En-tête (header) */
+  [data-theme="retro"] header,
+  [data-theme="retro"] #app-screen header {
+    background: var(--bg-primary);
+    padding: 25px 30px;
+    border: 1px solid var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  /* Header – contenu et icônes */
+  [data-theme="retro"] .header-content {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-primary);
+    padding: 15px;
+  }
+  [data-theme="retro"] .header-left h2 {
+    color: var(--text-primary);
+    font-family: "Courier New", monospace;
+  }
+  [data-theme="retro"] .header-left h2::before {
+    content: ">";
+    margin-right: 10px;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  
+  /* Boutons généraux */
+  [data-theme="retro"] .btn-action {
+    background: var(--bg-primary);
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+    text-transform: uppercase;
+    padding: 8px 16px;
+    transition: all 0.2s ease;
+  }
+  [data-theme="retro"] .btn-action:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+  }
+  
+  /* Boutons dans la zone d'en-tête */
+  [data-theme="retro"] .header-buttons .btn-action {
+    background: var(--bg-primary);
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+  }
+  [data-theme="retro"] .header-buttons .btn-action:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+  }
+  
+  /* Conteneurs principaux */
+  [data-theme="retro"] .main-content {
+    background: var(--bg-primary);
+    border: 2px solid var(--text-primary);
+    padding: 15px;
+    position: relative;
+  }
+  [data-theme="retro"] .main-actions {
+    background: var(--bg-secondary);
+    border: 2px solid var(--text-primary);
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  [data-theme="retro"] .categories-panel,
+  [data-theme="retro"] .passwords-panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-primary);
+  }
+  
+  /* Cartes et éléments de liste */
+  [data-theme="retro"] .password-item,
+  [data-theme="retro"] .category-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-primary);
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
+  }
+  [data-theme="retro"] .password-item:hover,
+  [data-theme="retro"] .category-item:hover {
+    background: var(--bg-primary);
+    border-color: var(--text-primary);
+  }
+  [data-theme="retro"] .category-item.active {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+  }
+  
+  /* Formulaires et champs */
+  [data-theme="retro"] input,
+  [data-theme="retro"] select,
+  [data-theme="retro"] textarea {
+    background: var(--input-bg);
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    font-family: "Courier New", monospace;
+  }
+  [data-theme="retro"] input:focus,
+  [data-theme="retro"] select:focus,
+  [data-theme="retro"] textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px var(--accent-color);
+  }
+  
+  /* Modales et notifications */
+  [data-theme="retro"] .modal {
+    background: var(--bg-primary);
+    border: 2px solid var(--text-primary);
+    box-shadow: 4px 4px 0 var(--text-primary);
+  }
+  [data-theme="retro"] .notification {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+    text-transform: uppercase;
+  }
+  
+  /* Effets rétro divers */
+  [data-theme="retro"] .drop-zone {
+    border: 2px dashed var(--text-primary);
+    background: var(--bg-secondary);
+  }
+  [data-theme="retro"] .drop-zone.drag-over {
+    background: var(--bg-primary);
+    border-style: solid;
+  }
+  [data-theme="retro"] .file-input-label {
+    background: var(--bg-secondary);
+    border: 2px solid var(--text-primary);
+    color: var(--text-primary);
+  }
+  [data-theme="retro"] .separator {
+    border-color: var(--text-primary);
+    opacity: 0.5;
+  }
+  
+  /* Formulaires et onglets */
+  [data-theme="retro"] .form-group label {
+    color: var(--text-primary);
+    text-transform: uppercase;
+    font-size: 0.9em;
+  }
+  [data-theme="retro"] .form-tabs {
+    border-bottom: 2px solid var(--text-primary);
+  }
+  [data-theme="retro"] .tab-button {
+    color: var(--text-secondary);
+  }
+  [data-theme="retro"] .tab-button.active {
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--text-primary);
+  }
+  
+  /* Options de mot de passe */
+  [data-theme="retro"] .password-options {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-primary);
+  }
+  [data-theme="retro"] .password-options label {
+    color: var(--text-primary);
+  }
+  [data-theme="retro"] input[type="range"],
+  [data-theme="retro"] input[type="checkbox"] {
+    border: 1px solid var(--text-primary);
+    background: var(--bg-primary);
+  }
+  
+  /* Analyse du vault et réglages */
+  [data-theme="retro"] .analyze-loading,
+  [data-theme="retro"] .analyze-loading i {
+    color: var(--text-primary);
+  }
+  [data-theme="retro"] .analyze-section h4 {
+    color: var(--text-primary);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--text-primary);
+  }
+  [data-theme="retro"] .settings-option {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-primary);
+  }
+  [data-theme="retro"] .settings-select {
+    background: var(--bg-primary);
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+  }
+  
+  /* Scrollbar personnalisée */
+  [data-theme="retro"] ::-webkit-scrollbar {
+    width: 12px;
+    background: var(--bg-primary);
+  }
+  [data-theme="retro"] ::-webkit-scrollbar-thumb {
+    background: var(--text-primary);
+    border: 2px solid var(--bg-primary);
+  }
+  [data-theme="retro"] ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+  
+  /* Tooltips */
+  [data-theme="retro"] [title]:hover::after {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+  }
+  
+  /* Boutons spécifiques et états */
+  [data-theme="retro"] #btn-generate-password,
+  [data-theme="retro"] #btn-toggle-password {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-primary);
+  }
+  [data-theme="retro"] .btn-action:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  [data-theme="retro"] .btn-action:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--text-primary);
+  }
+  [data-theme="retro"] *:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--text-primary);
+  }
+  
+  /* Supprimer certains effets (glow, scanlines, etc.) */
+  [data-theme="retro"]::before,
+  [data-theme="retro"]::after,
+  [data-theme="retro"] body::before,
+  [data-theme="retro"] body::after,
+  [data-theme="retro"] .main-actions::after,
+  [data-theme="retro"] header::after {
+    display: none;
+  }
+  
+  /* Ajouter ces styles dans la section du thème rétro */
+  [data-theme="retro"] #welcome-screen {
+    background: var(--bg-primary);
+    border: 2px solid var(--text-primary);
+    box-shadow: 4px 4px 0 var(--text-primary);
+  }
+  
+  [data-theme="retro"] #welcome-screen h1,
+  [data-theme="retro"] #welcome-screen p {
+    color: var(--text-primary);
+  }
+  
+  [data-theme="retro"] .welcome-icon {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+  }
+  
+  [data-theme="retro"] .welcome-buttons button {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0 var(--text-primary);
+    transition: all 0.2s ease;
+  }
+  
+  [data-theme="retro"] .welcome-buttons button:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--text-primary);
+  }
+  
+  [data-theme="retro"] #lock-overlay {
+    background: var(--bg-primary);
+  }
+  
+  [data-theme="retro"] #lock-overlay .lock-content {
+    background: var(--bg-primary);
+    border: 2px solid var(--text-primary);
+    box-shadow: 4px 4px 0 var(--text-primary);
+  }
+  
+  [data-theme="retro"] #lock-overlay h2,
+  [data-theme="retro"] #lock-overlay p {
+    color: var(--text-primary);
+  }
+  
+  [data-theme="retro"] #lock-overlay .lock-icon {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+  }
+  
+  [data-theme="retro"] #lock-overlay input {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+  }
+  
+  [data-theme="retro"] #lock-overlay input:focus {
+    box-shadow: 0 0 0 2px var(--text-primary);
+  }
+  
+  [data-theme="retro"] #lock-overlay .btn-action {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0 var(--text-primary);
+    transition: all 0.2s ease;
+  }
+  
+  [data-theme="retro"] #lock-overlay .btn-action:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--text-primary);
+  }
+  
+  [data-theme="retro"] #lock-overlay .btn-secondary {
+    background: var(--bg-secondary);
+    border-color: var(--text-secondary);
+    box-shadow: 4px 4px 0 var(--text-secondary);
+  }
+  
+  [data-theme="retro"] #lock-overlay .btn-secondary:hover {
+    background: var(--text-secondary);
+    color: var(--bg-primary);
+    box-shadow: 2px 2px 0 var(--text-secondary);
+  }
+  
+  [data-theme="retro"] .error-message {
+    color: #ff0000;
+    text-transform: uppercase;
+    font-family: "Courier New", monospace;
+  }
+  
+  [data-theme="retro"] #import-section,
+  [data-theme="retro"] #new-session-section {
+    background: var(--bg-primary);
+    border: 2px solid var(--text-primary);
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  [data-theme="retro"] .master-password-input label {
+    color: var(--text-primary);
+    text-transform: uppercase;
+  }
+  
+  [data-theme="retro"] .password-strength {
+    border: 1px solid var(--text-primary);
+  }
+  
+  [data-theme="retro"] .password-strength-text {
+    color: var(--text-primary);
+    text-transform: uppercase;
+    font-size: 0.8em;
+  }
+  
+  /* Écran d'accueil */
+  [data-theme="dark"] #welcome-screen {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  [data-theme="dark"] #welcome-screen h1,
+  [data-theme="dark"] #welcome-screen p {
+    color: var(--text-primary);
+  }
+
+  [data-theme="dark"] .welcome-icon {
+    background: var(--accent-color);
+    color: var(--text-primary);
+    border: none;
+  }
+
+  [data-theme="dark"] .welcome-buttons button {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+  }
+
+  [data-theme="dark"] .welcome-buttons button:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+  }
+
+  /* Écran de verrouillage */
+  [data-theme="dark"] #lock-overlay {
+    background: rgba(26, 27, 30, 0.95);
+    backdrop-filter: blur(8px);
+  }
+
+  [data-theme="dark"] #lock-overlay .lock-content {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  [data-theme="dark"] #lock-overlay h2,
+  [data-theme="dark"] #lock-overlay p {
+    color: var(--text-primary);
+  }
+
+  [data-theme="dark"] #lock-overlay .lock-icon {
+    background: var(--accent-color);
+    color: var(--text-primary);
+  }
+
+  [data-theme="dark"] #lock-overlay input {
+    background: var(--input-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+  }
+
+  [data-theme="dark"] #lock-overlay input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  }
+
+  /* Messages d'erreur */
+  [data-theme="dark"] .error-message {
+    color: var(--error-color);
+  }
+
+  /* Sections d'import et nouvelle session */
+  [data-theme="dark"] #import-section,
+  [data-theme="dark"] #new-session-section {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  /* Champs de mot de passe maître */
+  [data-theme="dark"] .master-password-input label {
+    color: var(--text-primary);
+  }
+
+  [data-theme="dark"] .password-strength {
+    border: 1px solid var(--border-color);
+  }
+
+  [data-theme="dark"] .password-strength-text {
+    color: var(--text-secondary);
+  }
+
+  /* Cartes de statistiques */
+  [data-theme="dark"] .stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  [data-theme="dark"] .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  [data-theme="dark"] .stat-card .stat-icon {
+    color: var(--accent-color);
+  }
+
+  [data-theme="dark"] .stat-card .stat-value {
+    color: var(--text-primary);
+  }
+
+  [data-theme="dark"] .stat-card .stat-label {
+    color: var(--text-secondary);
+  }
+
+  /* En-têtes de champs */
+  [data-theme="dark"] .field-header {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  [data-theme="dark"] .field-header .field-icon {
+    color: var(--text-secondary);
+  }
+
+  [data-theme="dark"] .field-header .field-text {
+    color: var(--text-primary);
+  }
+
+  /* Boutons spécifiques */
+  [data-theme="dark"] #btn-generate-password,
+  [data-theme="dark"] #btn-toggle-password {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+  }
+
+  [data-theme="dark"] #btn-generate-password:hover,
+  [data-theme="dark"] #btn-toggle-password:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+
+  /* Analyse du vault */
+  [data-theme="dark"] .analyze-loading,
+  [data-theme="dark"] .analyze-loading i {
+    color: var(--accent-color);
+  }
+
+  [data-theme="dark"] .analyze-section h4 {
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  [data-theme="dark"] .analyze-metric {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  /* États spéciaux des métriques */
+  [data-theme="dark"] .analyze-metric.warning {
+    background: rgba(241, 196, 15, 0.1);
+    border-color: var(--warning-color);
+  }
+
+  [data-theme="dark"] .analyze-metric.danger {
+    background: rgba(231, 76, 60, 0.1);
+    border-color: var(--error-color);
+  }
+
+  [data-theme="dark"] .analyze-metric.success {
+    background: rgba(46, 204, 113, 0.1);
+    border-color: var(--success-color);
+  }
+
+  /* Barre de recherche */
+  [data-theme="dark"] .search-bar {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+  

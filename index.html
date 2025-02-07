@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestionnaire de mots de passe</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="themes.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/3.2.0/sha.js"></script>
+</head>
+<body>
+
+  <!-- Écran d'accueil / Import / Nouvelle session -->
+  <div id="welcome-screen">
+    <div class="welcome-icon">
+      <i class="fas fa-shield-alt"></i>
+    </div>
+    <h1>Gestionnaire de mots de passe</h1>
+    <p>Sécurisez et gérez vos mots de passe en toute simplicité</p>
+    <div class="welcome-buttons">
+      <button id="btn-import">
+        <i class="fas fa-file-import"></i>
+        Importer un fichier chiffré
+      </button>
+      <button id="btn-new-session">
+        <i class="fas fa-plus-circle"></i>
+        Créer une nouvelle session
+      </button>
+    </div>
+
+    <div id="import-section" class="hidden">
+      <div class="drop-zone">
+        <div class="drop-zone-content">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Glissez votre fichier ici ou</p>
+          <input type="file" id="file-input" accept=".html" class="file-input" />
+          <label for="file-input" class="file-input-label">
+            Choisir un fichier
+          </label>
+        </div>
+      </div>
+      <div class="master-password-input">
+        <label for="master-password-import">Mot de passe maître :</label>
+        <input type="password" id="master-password-import" placeholder="Entrez votre mot de passe maître" />
+      </div>
+      <button id="btn-decrypter" class="action-button">
+        <i class="fas fa-unlock"></i> Déchiffrer
+      </button>
+      <p id="import-error" class="error-message"></p>
+    </div>
+
+    <div id="new-session-section" class="hidden">
+      <div class="master-password-input">
+        <label for="master-password-new">Choisir un mot de passe maître :</label>
+        <input type="password" id="master-password-new" placeholder="Créez un mot de passe maître fort" />
+        <div class="password-strength">
+          <div class="password-strength-bar"></div>
+        </div>
+        <div class="password-strength-text"></div>
+      </div>
+      <button id="btn-create-session" class="action-button">
+        <i class="fas fa-check-circle"></i> Valider
+      </button>
+      <p id="new-session-error" class="error-message"></p>
+    </div>
+  </div>
+
+  <!-- Écran principal de l'application -->
+  <div id="app-screen" class="hidden">
+    
+    <header>
+      <div class="header-content">
+        <div class="header-left">
+          <h2>Vault</h2>
+          <span class="password-count">0 mots de passe</span>
+        </div>
+        <div class="header-buttons">
+          <button id="btn-sort-view" class="btn-action">
+            <i class="fas fa-th-large"></i>
+            <span>Vue grille</span>
+          </button>
+          <button id="btn-search" class="btn-action">
+            <i class="fas fa-search"></i>
+            <span>Rechercher</span>
+          </button>
+          <button id="btn-docs" class="btn-action">
+            <i class="fas fa-book"></i>
+            <span>Documentation</span>
+          </button>
+          <button id="btn-analyze" class="btn-action">
+            <i class="fas fa-brain"></i>
+            <span>Analyse du Vault</span>
+          </button>
+          <button id="btn-lock" class="btn-action" title="Verrouiller le Vault (Alt+L)">
+            <i class="fas fa-lock"></i>
+            <span>Verrouiller</span>
+          </button>
+          <button id="btn-close-vault" class="btn-action" title="Fermer le Vault">
+            <i class="fas fa-power-off"></i>
+            <span>Fermer</span>
+          </button>
+          <button id="btn-settings" class="btn-action">
+            <i class="fas fa-cog"></i>
+          </button>
+        </div>
+      </div>
+      <div id="search-bar" class="search-bar hidden">
+        <input type="text" id="search-input" placeholder="Rechercher un mot de passe...">
+        <select id="search-filter">
+          <option value="all">Tout</option>
+          <option value="service">Service</option>
+          <option value="login">Identifiant</option>
+          <option value="category">Catégorie</option>
+        </select>
+        <button id="btn-close-search" class="btn-action">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <!-- Nouvelle section d'actions -->
+      <div class="main-actions">
+        <div class="action-section add-password">
+          <button id="btn-add-password" class="btn-action">
+            <i class="fas fa-key"></i>
+            <span>Nouveau </span>
+          </button>
+          <div class="shortcuts-hint">Alt+N</div>
+        </div>
+        
+        <div class="action-section data-section">
+          <!-- Cette section sera remplie plus tard -->
+        </div>
+        
+        <div class="action-section export">
+          <button id="btn-export" class="btn-action">
+            <i class="fas fa-file-export"></i>
+            <span>Exporter</span>
+          </button>
+          <div class="shortcuts-hint">Alt+E</div>
+        </div>
+      </div>
+
+      <!-- Contenu principal -->
+      <div class="content-panels">
+        <!-- Liste/Arborescence de catégories -->
+        <aside class="categories-panel">
+          <h3>Catégories</h3>
+          <ul id="category-list"></ul>
+          <div class="add-category">
+            <input type="text" id="new-category-name" placeholder="Nom catégorie" />
+            <button id="btn-add-category"><i class="fas fa-plus"></i></button>
+          </div>
+        </aside>
+
+        <!-- Tableau principal des passwords -->
+        <section class="passwords-panel">
+          <h3 id="current-category-title">Toutes les entrées</h3>
+          
+          <!-- Ajouter après la barre de recherche -->
+          <div class="sort-options">
+            <label>Trier par:</label>
+            <select id="sort-select">
+              <option value="service">Service</option>
+              <option value="login">Identifiant</option>
+              <option value="date">Date d'ajout</option>
+            </select>
+            <button id="btn-sort-direction">
+              <i class="fas fa-sort-amount-down"></i>
+            </button>
+          </div>
+
+          <ul id="password-list" class="password-list">
+            <!-- Entrées de mots de passe générées dynamiquement -->
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <div class="notification" id="copy-notification">Mot de passe copié !</div>
+    <div class="notification" id="export-notification" style="display: none;">Fichier exporté avec succès !</div>
+    <div class="modal-overlay" id="add-password-overlay"></div>
+    <div class="modal password-modal" id="add-password-modal">
+      <h3>Ajouter un mot de passe</h3>
+      
+      <div class="form-tabs">
+        <button type="button" class="tab-button active" data-tab="password">Mot de passe</button>
+        <button type="button" class="tab-button" data-tab="info">Informations</button>
+        <button type="button" class="tab-button" data-tab="otp">Ajouter un code OTP</button>
+      </div>
+      
+      <form class="password-form" id="password-form">
+        <div class="tab-content" id="password-tab">
+          <div class="form-group">
+            <label for="service-input">Service</label>
+            <input type="text" id="service-input" placeholder="Ex: Gmail, Facebook..." required>
+          </div>
+          
+          <div class="form-group">
+            <label for="login-input">Identifiant / Email</label>
+            <input type="text" id="login-input" placeholder="Votre identifiant" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password-input">Mot de passe</label>
+            <div class="password-input-group">
+              <input type="password" id="password-input" placeholder="Votre mot de passe" required>
+              <button type="button" id="btn-generate-password" class="btn-action">
+                <i class="fas fa-dice"></i>
+              </button>
+              <button type="button" id="btn-toggle-password" class="btn-action">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="password-options">
+              <label><input type="checkbox" id="include-uppercase" checked> Majuscules</label>
+              <label><input type="checkbox" id="include-numbers" checked> Chiffres</label>
+              <label><input type="checkbox" id="include-symbols" checked> Symboles</label>
+              <input type="range" id="password-length" min="8" max="32" value="16">
+              <span id="password-length-value">16 caractères</span>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="category-select">Catégorie</label>
+            <div class="category-input-group">
+              <select id="category-select">
+                <option value="">Toutes les entrées</option>
+              </select>
+              <button type="button" id="btn-add-category-modal" class="btn-action">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-content hidden" id="info-tab">
+          <div class="form-group">
+            <label for="url-input">URL</label>
+            <input type="url" id="url-input" placeholder="https://example.com">
+          </div>
+          
+          <div class="form-group dates-group">
+            <div class="date-input">
+              <label for="creation-date">Date de création</label>
+              <input type="date" id="creation-date">
+            </div>
+            <div class="date-input">
+              <label for="expiration-date">Date d'expiration</label>
+              <input type="date" id="expiration-date">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="notes-input">Notes</label>
+            <textarea id="notes-input" rows="4" placeholder="Ajoutez vos notes ici..."></textarea>
+          </div>
+        </div>
+        
+        <div class="tab-content hidden" id="otp-tab">
+          <div class="form-group">
+            <label for="otp-secret">Clé secrète OTP</label>
+            <div class="otp-input-group">
+              <input type="text" id="otp-secret" placeholder="Ex: I65VU7K5ZQL7WB4E" pattern="[A-Za-z0-9]+" />
+              <button type="button" id="btn-verify-otp" class="btn-action">
+                <i class="fas fa-check"></i>
+              </button>
+            </div>
+            <div class="otp-preview">
+              <span class="otp-display"></span>
+              <div class="otp-timer"></div>
+            </div>
+            <p class="otp-help">
+              Entrez la clé secrète fournie par le service pour générer des codes OTP à 6 chiffres.
+            </p>
+          </div>
+        </div>
+        
+        <div class="modal-buttons">
+          <button type="button" id="btn-cancel-password" class="btn-action">Annuler</button>
+          <button type="submit" class="btn-action">Ajouter</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-overlay" id="settings-overlay"></div>
+    <div class="modal settings-modal" id="settings-modal">
+      <h3>Paramètres</h3>
+      <form class="settings-form" id="settings-form">
+        <!-- Langue -->
+        <div class="form-group">
+          <label>Langue</label>
+          <div class="settings-option">
+            <select id="language-select" class="settings-select">
+              <option value="fr">Français</option>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="de">Deutsch</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Thème -->
+        <div class="form-group">
+          <label>Thème</label>
+          <div class="settings-option">
+            <select id="theme-select" class="settings-select">
+              <option value="light">Clair</option>
+              <option value="dark">Sombre</option>
+              <option value="retro">Retro</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Sécurité -->
+        <div class="form-group">
+          <label>Paramètres de sécurité</label>
+          <div class="settings-option">
+            <label><input type="checkbox" id="auto-lock"> Verrouillage automatique</label>
+            <select id="lock-timeout">
+              <option value="1">1 minute</option>
+              <option value="5">5 minutes</option>
+              <option value="15">15 minutes</option>
+              <option value="30">30 minutes</option>
+            </select>
+          </div>
+          <div class="settings-option">
+            <label><input type="checkbox" id="double-auth"> Double authentification</label>
+          </div>
+        </div>
+        
+        <div class="modal-buttons">
+          <button type="button" id="btn-cancel-settings" class="btn-action">Fermer</button>
+          <button type="submit" class="btn-action">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="analyze-overlay"></div>
+  <div class="modal analyze-modal" id="analyze-modal">
+    <h3>Analyse de votre Vault</h3>
+    <div class="analyze-content">
+      <div class="analyze-loading hidden">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Analyse en cours...</p>
+      </div>
+      <div class="analyze-results">
+        <!-- Le contenu sera généré dynamiquement -->
+      </div>
+    </div>
+    <div class="modal-buttons">
+      <button type="button" id="btn-close-analyze" class="btn-action">Fermer</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

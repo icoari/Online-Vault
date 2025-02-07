@@ -1,0 +1,2113 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #2c3e50;
+    min-height: 100vh;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #welcome-screen,
+  #app-screen {
+    padding: 20px;
+  }
+  
+  /* Écran d'accueil */
+  #welcome-screen {
+    max-width: 400px;
+    margin: 80px auto;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+  }
+  
+  #welcome-screen h1 {
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+  
+  #welcome-screen p {
+    color: #666;
+    font-size: 1em;
+    margin-bottom: 30px;
+  }
+  
+  .welcome-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .welcome-buttons button {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 12px;
+    background: #4a90e2;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .welcome-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+  }
+  
+  .welcome-buttons button i {
+    font-size: 1.2em;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  /* Écran principal */
+  #app-screen header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px 30px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 8px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+  }
+  
+  .header-left h2 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #2c3e50;
+  }
+  
+  .password-count {
+    display: none;
+  }
+  
+  .header-buttons {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .header-buttons .btn-action {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #f8f9fa;
+    color: #2c3e50;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .header-buttons .btn-action:hover {
+    background: #4a90e2;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+  }
+  
+  .header-buttons .btn-action i {
+    font-size: 1.1em;
+  }
+  
+  #btn-settings {
+    width: 42px;
+    padding: 10px;
+  }
+  
+  #app-screen .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .content-panels {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 15px;
+  }
+  
+  /* Catégories */
+  .categories-panel {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    backdrop-filter: blur(10px);
+  }
+  
+  #category-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 10px;
+  }
+  
+  #category-list li {
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  #category-list li:hover {
+    background-color: rgba(74, 144, 226, 0.1);
+  }
+  
+  #category-list li.active {
+    background-color: #4a90e2;
+    color: white;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+  }
+  
+  #category-list li.drag-over {
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 0 10px rgba(0,123,255,0.4);
+    transform: scale(1.05);
+  }
+  
+  .add-category {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .add-category input {
+    flex: 1;
+  }
+  
+  /* Passwords panel */
+  .passwords-panel {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+  }
+  
+  .password-actions {
+    margin-bottom: 20px;
+  }
+  
+  /* Style pour la vue en grille */
+  .password-list.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 15px;
+  }
+  
+  .password-list.grid-view .password-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+  }
+  
+  .password-list.grid-view .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .password-list.grid-view .button-group button {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .password-list.grid-view .button-group button i {
+    margin: 0;
+  }
+  
+  .password-list.grid-view .password-values {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .password-list.grid-view .field-header {
+    margin: 0;
+    width: 100%;
+  }
+  
+  /* Style par défaut (vue liste) */
+  .password-list {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .password-item {
+    background: white;
+    padding: 20px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .password-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .field-header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .field-header .field-icon {
+    color: #666;
+    width: 16px;
+    text-align: center;
+  }
+  
+  .field-header .field-text {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.95em;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .password-item button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .password-item button i {
+    font-size: 1.1em;
+  }
+  
+  .btn-reveal {
+    position: relative;
+    overflow: hidden;
+    background: #4a90e2;
+    color: white;
+  }
+  
+  .btn-reveal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    transform-origin: center;
+    transition: transform 5s linear;
+  }
+  
+  .btn-reveal.revealing::before {
+    transform: scale(1);
+  }
+  
+  .circular-progress {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 8px;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-reveal.revealing .circular-progress {
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  
+  .btn-copy {
+    background: #27ae60;
+    color: white;
+  }
+  
+  .btn-edit {
+    background: #f39c12;
+    color: white;
+  }
+  
+  .btn-delete {
+    background: #e74c3c;
+    color: white;
+  }
+  
+  .password-item button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .password-item.drag-over {
+    background-color: #e8f4ff;
+    box-shadow: 0 0 15px rgba(0,123,255,0.4);
+  }
+  
+  /* Style pour la zone de drop */
+  .drop-zone {
+    padding: 40px 20px;
+    border: 3px dashed #4a90e2;
+    border-radius: 12px;
+    background: rgba(74, 144, 226, 0.05);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .drop-zone:hover {
+    background: rgba(74, 144, 226, 0.1);
+    border-color: #357abd;
+  }
+  
+  .drop-zone.drag-over {
+    background: rgba(74, 144, 226, 0.15);
+    border-color: #2980b9;
+    transform: scale(1.02);
+  }
+  
+  .drop-zone-content {
+    text-align: center;
+  }
+  
+  .drop-zone-content i {
+    font-size: 48px;
+    color: #4a90e2;
+    margin-bottom: 15px;
+  }
+  
+  .drop-zone-content p {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .file-input-label {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #4a90e2;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    min-width: 140px;
+    text-align: center;
+  }
+  
+  .file-input-label:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+  }
+  
+  /* Style pour le formulaire d'ajout de mot de passe */
+  .password-form .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  /* S'assurer que tous les champs ont la même taille */
+  .password-form .form-row:first-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 10px;
+  }
+  
+  .password-form input,
+  .password-form select {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+  }
+  
+  .password-form input:focus,
+  .password-form select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+  }
+  
+  .password-form button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .password-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Style pour la notification */
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    background: #28a745;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .notification.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Modifier le style de la barre de progression */
+  .password-timer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #4a90e2;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 5s linear;
+  }
+  
+  .password-timer.active {
+    transform: scaleX(1);
+  }
+  
+  /* Style commun pour les cartes/éléments */
+  .card-style {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px #ccc;
+    margin-bottom: 15px;
+  }
+  
+  /* Style pour les éléments révélés */
+  .password-item.revealed {
+    background-color: #e8f4ff;
+    box-shadow: 0 0 10px rgba(0,123,255,0.3);
+    border: none;
+  }
+  
+  /* Style des inputs */
+  input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+  }
+  
+  /* Style des actions sur les mots de passe */
+  .password-actions {
+    margin-bottom: 20px;
+  }
+  
+  /* Style pour la barre de recherche */
+  .search-bar {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+  
+  .search-bar.hidden {
+    display: none;
+  }
+  
+  .search-bar input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+  }
+  
+  .search-bar input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    outline: none;
+  }
+  
+  .search-bar select {
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    font-size: 0.95em;
+  }
+  
+  #btn-close-search {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #f8f9fa;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  #btn-close-search:hover {
+    background: #e74c3c;
+    color: white;
+  }
+  
+  /* Sort options */
+  .sort-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .sort-options select {
+    padding: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+  }
+  
+  .sort-options button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: #4a90e2;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Style commun pour tous les boutons d'action */
+  .btn-action {
+    padding: 12px 24px;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .btn-action:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+  }
+  
+  .btn-action i {
+    font-size: 1.1em;
+  }
+  
+  /* Style spécifique pour le bouton d'ajout de catégorie */
+  .add-category button {
+    padding: 8px;
+    min-width: 40px;
+    height: 40px;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .add-category button:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+  }
+  
+  /* Mise à jour des styles des boutons spécifiques */
+  #btn-decrypter,
+  #btn-create-session,
+  #btn-add-password,
+  #btn-export {
+    composes: btn-action;
+  }
+  
+  /* Style de la modale d'ajout de mot de passe */
+  .password-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 450px;
+    max-width: 90vw;
+    animation: modalAppear 0.3s ease;
+  }
+  
+  @keyframes modalAppear {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  .password-modal.show {
+    display: block;
+  }
+  
+  .password-modal h3 {
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin: 0 0 35px 0;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  .form-group {
+    margin-bottom: 28px;
+  }
+  
+  .form-group:last-of-type {
+    margin-bottom: 35px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 500;
+    color: #2c3e50;
+    font-size: 0.95em;
+  }
+  
+  /* Style des inputs de la modale */
+  .password-form input,
+  .password-form select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    box-sizing: border-box;
+  }
+  
+  .password-form input::placeholder {
+    color: #adb5bd;
+    font-size: 0.95em;
+  }
+  
+  /* Style pour l'ajout de catégorie dans le formulaire */
+  .category-input-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .category-input-group select {
+    flex: 1;
+  }
+  
+  #btn-add-category-modal {
+    min-width: 48px;
+    height: 48px;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
+    margin-top: 0;
+  }
+  
+  /* Style des boutons de la modale */
+  .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 40px;
+  }
+  
+  .modal-buttons .btn-action {
+    min-width: 120px;
+    padding: 14px 25px;
+    font-size: 0.95em;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  /* Style de l'overlay */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    backdrop-filter: blur(5px);
+    animation: overlayAppear 0.3s ease;
+  }
+  
+  @keyframes overlayAppear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .modal-overlay.show {
+    display: block;
+  }
+  
+  /* Style des sections d'import et nouvelle session */
+  #import-section,
+  #new-session-section {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 25px;
+    animation: sectionAppear 0.3s ease;
+  }
+  
+  @keyframes sectionAppear {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Style des champs de mot de passe maître */
+  .master-password-input {
+    margin: 20px 0;
+  }
+  
+  .master-password-input label {
+    display: block;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 0.95em;
+  }
+  
+  .master-password-input input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1em;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .master-password-input input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    background: white;
+    outline: none;
+  }
+  
+  /* Style des messages d'erreur */
+  .error-message {
+    color: #e74c3c;
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: center;
+  }
+  
+  /* Style des boutons d'action */
+  .action-button {
+    width: 100%;
+    padding: 15px;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .action-button:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+  }
+  
+  .action-button i {
+    font-size: 1.2em;
+  }
+  
+  .password-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .password-input-group input {
+    flex: 1;
+  }
+  
+  .password-input-group button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .password-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .password-options label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    font-size: 0.9em;
+  }
+  
+  .password-options input[type="range"] {
+    width: 150px;
+  }
+  
+  #password-length-value {
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  /* Style pour indiquer la force du mot de passe */
+  .password-strength {
+    height: 4px;
+    background: #eee;
+    margin-top: 8px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .password-strength-bar {
+    height: 100%;
+    width: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .strength-weak { background: #dc3545; width: 33%; }
+  .strength-medium { background: #ffc107; width: 66%; }
+  .strength-strong { background: #28a745; width: 100%; }
+  
+  /* Style pour la modale de catégorie */
+  .category-modal {
+    width: 400px;
+    max-width: 90vw;
+    display: none;
+  }
+  
+  .category-modal.show {
+    display: block;
+  }
+  
+  .category-modal h3 {
+    margin-bottom: 25px;
+  }
+  
+  .category-form input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+  }
+  
+  .category-form input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    outline: none;
+  }
+  
+  /* Style pour les boutons en mode liste */
+  .password-item .button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  
+  .master-password-input .password-strength {
+    height: 4px;
+    background: #eee;
+    margin-top: 8px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .master-password-input .password-strength-bar {
+    height: 100%;
+    width: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .master-password-input .password-strength-text {
+    font-size: 0.9em;
+    margin-top: 5px;
+    text-align: right;
+  }
+  
+  .master-password-input .strength-weak {
+    background: #dc3545;
+    width: 33%;
+  }
+  
+  .master-password-input .strength-medium {
+    background: #ffc107;
+    width: 66%;
+  }
+  
+  .master-password-input .strength-strong {
+    background: #28a745;
+    width: 100%;
+  }
+  
+  /* Style pour l'icône principale */
+  .welcome-icon {
+    width: 80px;
+    height: 80px;
+    background: #4a90e2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    color: white;
+    font-size: 2em;
+  }
+  
+  /* Nouvelle section pour les actions principales */
+  .main-actions {
+    display: flex;
+    gap: 15px;
+    margin: 0 0 0;
+  }
+  
+  .action-section {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Style des boutons dans les sections */
+  .action-section .btn-action {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 12px;
+    background: #4a90e2;
+    color: white;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .action-section .btn-action i {
+    font-size: 1.1em;
+  }
+  
+  .action-section .btn-action:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+  }
+  
+  /* Ajustement des proportions */
+  .action-section.add-password {
+    width: 270px;
+    flex: 0 0 270px;
+    padding: 15px;
+  }
+  
+  .action-section.data-section {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .action-section.export {
+    width: 300px;
+    flex: 0 0 300px;
+    padding: 20px;
+  }
+  
+  .action-section h3 {
+    margin: 0 0 15px 0;
+    color: #2c3e50;
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+  
+  /* Style pour la section de statistiques */
+  .data-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .stat-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: left;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 80px;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-card .stat-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4em;
+    color: #4a90e2;
+    flex-shrink: 0;
+  }
+  
+  .stat-card .stat-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .stat-card .stat-value {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 4px;
+  }
+  
+  .stat-card .stat-label {
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  .stat-card .stat-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: #4a90e2;
+    transition: width 0.3s ease;
+  }
+  
+  .stat-card.warning .stat-icon,
+  .stat-card.warning .stat-value {
+    color: #f39c12;
+  }
+  
+  .stat-card.danger .stat-icon,
+  .stat-card.danger .stat-value {
+    color: #e74c3c;
+  }
+  
+  .stat-card.success .stat-icon,
+  .stat-card.success .stat-value {
+    color: #27ae60;
+  }
+  
+  /* Ajouter le style pour la date */
+  .stat-card .stat-date {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 2px;
+  }
+  
+  /* Ajouter le style pour les favoris */
+  .password-item .btn-favorite {
+    background: #f8f9fa !important;
+    color: #adb5bd !important;
+  }
+  
+  .password-item .btn-favorite.active {
+    background: #fff3cd !important;
+    color: #f1c40f !important;
+  }
+  
+  .password-item .btn-favorite.active i {
+    animation: starPulse 0.3s ease;
+  }
+  
+  @keyframes starPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Ajuster le groupe de boutons pour inclure le favori */
+  .password-item .button-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  /* Style pour le drag and drop */
+  .dragging-active {
+    cursor: grabbing !important;
+  }
+  
+  .password-item.dragging {
+    opacity: 0.9;
+    transform: scale(1.02) rotate(1deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+  }
+  
+  .password-item:not(.dragging) {
+    transition: all 0.3s ease;
+  }
+  
+  .password-item.drag-over {
+    border: 2px dashed #4a90e2;
+    transform: scale(1.02);
+    background: rgba(74, 144, 226, 0.1);
+  }
+  
+  .category-item.drag-over {
+    background: rgba(74, 144, 226, 0.2);
+    transform: scale(1.05);
+    border: 2px dashed #4a90e2;
+  }
+  
+  .drag-ghost {
+    opacity: 0.8;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+  
+  /* Animation pour le drop */
+  @keyframes dropAnimation {
+    0% {
+      transform: translateY(-20px) scale(1.02);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .password-item.dropped {
+    animation: dropAnimation 0.3s ease forwards;
+  }
+  
+  /* Indicateur de position pour le drag and drop */
+  .drop-placeholder {
+    background-color: rgba(74, 144, 226, 0.1);
+    border: 2px dashed #4a90e2;
+    border-radius: 12px;
+    margin: 10px 0;
+    height: 80px;
+    animation: placeholderPulse 1.5s infinite;
+  }
+  
+  @keyframes placeholderPulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.5; }
+  }
+  
+  /* Modifier le style des catégories */
+  .category-item {
+    padding: 0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    margin-bottom: 8px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .category-item:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+  }
+  
+  .category-item.active {
+    background-color: #4a90e2;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+  }
+  
+  .category-item.active span {
+    color: white !important;
+  }
+  
+  /* Améliorer le style du bouton d'édition */
+  .btn-edit-category {
+    opacity: 0;
+    background: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    margin-left: 8px;
+  }
+  
+  .category-item:hover .btn-edit-category {
+    opacity: 0.7;
+  }
+  
+  .btn-edit-category:hover {
+    opacity: 1 !important;
+    background: rgba(0, 0, 0, 0.05);
+    color: #4a90e2;
+  }
+  
+  .category-item.active .btn-edit-category {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .category-item.active .btn-edit-category:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+  
+  .category-edit-modal {
+    width: 400px;
+    max-width: 90vw;
+  }
+  
+  .color-choices {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+  }
+  
+  .color-choice {
+    width: 100%;
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .color-choice:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .color-choice.selected {
+    box-shadow: 0 0 0 3px white, 0 0 0 6px currentColor;
+  }
+  
+  .color-choice.selected::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .shortcuts-hint {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 8px;
+    text-align: center;
+  }
+  
+  /* Style pour la modale des paramètres */
+  .settings-modal {
+    width: 400px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .settings-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  
+  .settings-option label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 0.95em;
+    color: #2c3e50;
+  }
+  
+  .settings-option select {
+    padding: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    font-size: 0.9em;
+  }
+  
+  .settings-form .form-group {
+    margin-bottom: 25px;
+  }
+  
+  .settings-form .form-group > label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .modal.show {
+    display: block;
+  }
+  
+  /* Select personnalisé */
+  .settings-select {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    font-size: 0.9em;
+    cursor: pointer;
+  }
+  
+  .settings-select:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  }
+  
+  /* Ajouter ces styles */
+  .category-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 12px 16px;
+  }
+  
+  /* Style pour la modale d'analyse */
+  .analyze-modal {
+    width: 600px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .analyze-content {
+    margin: 20px 0;
+  }
+  
+  .analyze-loading {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .analyze-loading i {
+    font-size: 2em;
+    color: #4a90e2;
+    margin-bottom: 10px;
+  }
+  
+  .analyze-results {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  
+  .analyze-section {
+    margin-bottom: 20px;
+  }
+  
+  .analyze-section h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+  
+  .analyze-metric {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .analyze-metric i {
+    width: 24px;
+    text-align: center;
+  }
+  
+  .analyze-metric.warning {
+    background: #fff3cd;
+    color: #856404;
+  }
+  
+  .analyze-metric.danger {
+    background: #f8d7da;
+    color: #721c24;
+  }
+  
+  .analyze-metric.success {
+    background: #d4edda;
+    color: #155724;
+  }
+  
+  .analyze-chart {
+    height: 200px;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  /* Ajouter les styles pour l'OTP */
+  .form-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+  }
+  
+  .tab-button {
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1em;
+    color: #666;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s ease;
+  }
+  
+  .tab-button.active {
+    color: #4a90e2;
+    font-weight: 500;
+    position: relative;
+  }
+  
+  .tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #4a90e2;
+  }
+  
+  .tab-content {
+    display: block;
+  }
+  
+  .tab-content.hidden {
+    display: none;
+  }
+  
+  .otp-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .otp-preview {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+  }
+  
+  .otp-display {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #2c3e50;
+    letter-spacing: 2px;
+  }
+  
+  .otp-timer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(74, 144, 226, 0.1);
+  }
+  
+  .otp-timer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress, 100%);
+    background: #4a90e2;
+    transition: width 1s linear;
+  }
+  
+  .otp-help {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  /* Style pour l'affichage OTP dans la liste des mots de passe */
+  .password-item .otp-code {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    width: auto;
+  }
+  
+  .password-item .otp-code .field-header {
+    background: #f8f9fa;
+  }
+  
+  .password-item .otp-display {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #2c3e50;
+    letter-spacing: 2px;
+  }
+  
+  .otp-timer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(74, 144, 226, 0.1);
+  }
+  
+  .otp-timer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress, 100%);
+    background: #4a90e2;
+    transition: width 1s linear;
+  }
+  
+  /* Style spécifique pour la vue en grille */
+  .password-list.grid-view .password-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 20px;
+  }
+  
+  .password-list.grid-view .field-header {
+    margin: 0;
+    width: 100%;
+  }
+  
+  /* Ajouter/modifier les styles pour le conteneur des valeurs */
+  .password-values {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .password-values.with-otp {
+    display: grid;
+    grid-template-columns: 0.4fr 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .password-values .password-value {
+    flex: 1;
+  }
+  
+  .password-values .otp-code {
+    margin: 0;
+    border-right: none;
+  }
+  
+  /* Ajuster le style des champs pour la vue liste */
+  .password-list:not(.grid-view) .password-item {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.3fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  /* Ajuster pour la vue grille */
+  .password-list.grid-view .password-values {
+    width: 100%;
+  }
+  
+  /* Style du timer OTP */
+  .otp-timer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(74, 144, 226, 0.1);
+  }
+  
+  .otp-timer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress, 100%);
+    background: #4a90e2;
+    transition: width 1s linear;
+  }
+  
+  /* Ajuster la taille des champs pour qu'ils soient égaux */
+  .field-header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .field-header > *:not(i) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* Modifier le style du champ mot de passe */
+  .password-text {
+    font-family: monospace;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    flex: 1;
+    text-align: left;
+  }
+  
+  /* Améliorer l'animation du bouton reveal */
+  .btn-reveal.revealing .circular-progress {
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  
+  .circular-progress {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 8px;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  /* Supprimer l'ancienne animation */
+  @keyframes otpTimer {
+    0% { transform: scaleX(1); }
+    100% { transform: scaleX(0); }
+  }
+  
+  /* Style spécifique pour le champ OTP */
+  .password-values .otp-code .field-header {
+    padding: 0 8px;
+    justify-content: center;
+  }
+  
+  /* Ajuster la taille du texte OTP */
+  .password-item .otp-display {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #2c3e50;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 0;
+  }
+  
+  /* Ajuster l'icône de l'OTP */
+  .otp-code .field-icon {
+    font-size: 0.9em;
+    margin-right: 4px;
+  }
+  
+  /* Ajouter un indicateur de catégorie */
+  .password-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--category-color, #e0e0e0);
+    opacity: 0.8;
+  }
+  
+  /* Ajouter des états de survol améliorés */
+  .password-item .button-group button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+  }
+  
+  .btn-reveal:hover { background: #357abd !important; }
+  .btn-copy:hover { background: #219a52 !important; }
+  .btn-edit:hover { background: #d68910 !important; }
+  .btn-delete:hover { background: #c0392b !important; }
+  
+  /* Ajouter un style pour indiquer que c'est cliquable */
+  .password-values .field-header {
+    cursor: pointer;
+  }
+  
+  .password-values .field-header:hover {
+    background: #f1f3f5;
+  }
+  
+  .password-values .field-header:active {
+    background: #e9ecef;
+  }
+  
+  /* Ajouter ces styles pour l'overlay de verrouillage */
+  #lock-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: lockFadeIn 0.3s ease;
+  }
+  
+  @keyframes lockFadeIn {
+    from {
+      opacity: 0;
+      backdrop-filter: blur(0);
+    }
+    to {
+      opacity: 1;
+      backdrop-filter: blur(10px);
+    }
+  }
+  
+  .lock-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+  }
+  
+  .lock-icon {
+    width: 80px;
+    height: 80px;
+    background: #4a90e2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    color: white;
+    font-size: 2em;
+  }
+  
+  .lock-content h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .lock-content p {
+    color: #666;
+    margin-bottom: 25px;
+  }
+  
+  .lock-content .master-password-input {
+    margin-bottom: 20px;
+  }
+  
+  .lock-content #unlock-error {
+    color: #e74c3c;
+    margin-top: 15px;
+    font-size: 0.9em;
+  }
+  
+  .lock-content #btn-unlock {
+    width: 100%;
+    padding: 15px;
+  }
+  
+  /* Ajouter les styles pour le nouvel onglet */
+  .dates-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .date-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  #notes-input {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95em;
+    resize: vertical;
+    transition: all 0.3s ease;
+  }
+  
+  #notes-input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    outline: none;
+  }
+  
+  /* Style pour les dates d'expiration dans l'analyse */
+  .analyze-metric.expiring {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+  }
+  
+  .expiring-details {
+    font-size: 0.9em;
+    color: #856404;
+    margin-top: 5px;
+  }
+  
+  /* Ajuster l'espacement des onglets */
+  .form-tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .tab-button {
+    flex: 1;
+    text-align: center;
+  }
+  
+  /* Style pour les boutons de l'écran de verrouillage */
+  .lock-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .lock-buttons .btn-action {
+    flex: 1;
+  }
+  
+  .btn-secondary {
+    background: #6c757d !important;
+  }
+  
+  .btn-secondary:hover {
+    background: #5a6268 !important;
+  }
+  
+  /* Ajuster l'espacement des éléments */
+  .lock-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .lock-content .error-message {
+    margin-top: -10px;
+  }
+    
